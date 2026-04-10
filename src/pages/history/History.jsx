@@ -12,7 +12,7 @@ const serverUrl=useContext(AuthDataContext)
   useEffect(() => {
     axios
       .get(
-        `${serverUrl}/transaction/transaction/${transactionId}`,
+        `${serverUrl}/api/transaction/transaction/${transactionId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

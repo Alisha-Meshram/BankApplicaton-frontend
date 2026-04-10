@@ -8,7 +8,7 @@ const ChangePin = () => {
   const [newPin, setNewPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [error, setError] = useState("");
-const serverUrl=useContext(AuthDataContext)
+const {serverUrl}=useContext(AuthDataContext)
   const ChangePin = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -17,7 +17,7 @@ const serverUrl=useContext(AuthDataContext)
     }
     try {
       const res = await axios.post(
-        `${serverUrl}/user/change-pin`,
+        `${serverUrl}/api/user/change-pin`,
         { currentPin, newPin,confirmPin},
         { headers: { Authorization: `Bearer ${token}` } }
       );

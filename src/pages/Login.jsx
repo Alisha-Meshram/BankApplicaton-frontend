@@ -17,7 +17,7 @@ const navigate=useNavigate()
     setErr("");
     e.preventDefault();
     try {
-      const res = await axios.post(`${serverUrl}/auth/loginUser`, {
+      const res = await axios.post(`${serverUrl}/api/auth/loginUser`, {
         email,
         password,
       });

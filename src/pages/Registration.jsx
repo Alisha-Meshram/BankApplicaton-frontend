@@ -23,7 +23,7 @@ const Registration = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${serverUrl}/auth/registerUser`,
+        `${serverUrl}/api/auth/registerUser`,
         { name, email, password,confirmpass,transactionpin }
       );
       setName("");

@@ -15,7 +15,7 @@ const HHeader = ({retrive}) => {
     const fetchTransaction = async () => {
       try {
         const { data } = await axios.get(
-          `${serverUrl}/transaction/`,
+          `${serverUrl}/api/transaction/`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

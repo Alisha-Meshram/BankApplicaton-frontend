@@ -16,7 +16,7 @@ const Dashboard = () => {
     const getData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${serverUrl}/user/balance`, {
+        const res = await axios.get(`${serverUrl}/api/user/balance`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBalance(res.data.balance);
@@ -31,7 +31,7 @@ const Dashboard = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${serverUrl}/auth/me`, {
+        const res = await axios.get(`${serverUrl}/api/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserName(res.data.name);

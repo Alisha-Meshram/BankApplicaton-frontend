@@ -18,7 +18,7 @@ const ChangePass = () => {
     }
     try {
       const res = await axios.post(
-        `${serverUrl}/user/change-password`,
+        `${serverUrl}/api/user/change-password`,
         { currentPassword, newPassword, confirmPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

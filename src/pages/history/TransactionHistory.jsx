@@ -22,7 +22,7 @@ const TransactionHistory = () => {
     const fetchTransaction = async () => {
       const token = localStorage.getItem("token");
       try {
-        const res = await axios.get(`${serverUrl}/transaction/`, {
+        const res = await axios.get(`${serverUrl}/api/transaction/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const transactions = res.data.getTransaction;

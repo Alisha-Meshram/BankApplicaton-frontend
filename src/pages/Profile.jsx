@@ -16,7 +16,7 @@ const Profile = () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.get(
-          `${serverUrl}/auth/me`,
+          `${serverUrl}/api/auth/me`,
        
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -35,7 +35,7 @@ const Profile = () => {
     const getBalance=async()=>{
         const token=localStorage.getItem('token')
         try {
-           const res= await axios.get(`${serverUrl}/user/balance`,{headers:{Authorization: `Bearer ${token}`}})
+           const res= await axios.get(`${serverUrl}/api/user/balance`,{headers:{Authorization: `Bearer ${token}`}})
 
            console.log(res.data)
            setBalance(res.data.balance)

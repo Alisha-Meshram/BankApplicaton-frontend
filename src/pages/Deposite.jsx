@@ -15,7 +15,7 @@ setError('')
 setSuccess('')
 try {
     const token=localStorage.getItem('token')
-    const res=await axios.post(`${serverUrl}/transaction`,{type:'deposite',amount,transactionpin},{headers:{Authorization:`Bearer ${token}`}})
+    const res=await axios.post(`${serverUrl}/api/transaction`,{type:'deposite',amount,transactionpin},{headers:{Authorization:`Bearer ${token}`}})
     console.log(res.data)
     toast.success("Deposite Successfull 💰")
     setSuccess('deposite successfull')

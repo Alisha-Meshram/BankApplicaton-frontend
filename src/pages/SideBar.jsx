@@ -20,7 +20,7 @@ const SideBar = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${serverUrl}/auth/me`, {
+        const res = await axios.get(`${serverUrl}/api/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserName(res.data.name);

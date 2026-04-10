@@ -17,7 +17,7 @@ const SendMoney = () => {
     const fetchUser =async () => {
       try {
         const token = localStorage.getItem("token");
-        const res =await axios.get(`${serverUrl}/user/users`, {
+        const res =await axios.get(`${serverUrl}/api/user/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(res.data);
@@ -37,7 +37,7 @@ const SendMoney = () => {
         setSuccess('')
       const token = localStorage.getItem("token");
       const res =await axios.post(
-        `${serverUrl}/transaction`,
+        `${serverUrl}/api/transaction`,
         { type: "send",recipient: recipient, amount: Number(amount), transactionpin:transactionpin },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -3,10 +3,10 @@ import React, { createContext } from 'react'
 
 export const AuthDataContext=createContext()
 const AuthContext = ({children}) => {
-    const serverUrl='http://localhost:7000/api'
+    const serverUrl='https://bankapplication-backend-ela2.onrender.com'
 
     const value={
-       serverUrl
+        serverUrl
     }
   return (
     <div>

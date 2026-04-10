@@ -12,7 +12,7 @@ const Navbar = () => {
     const getData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${serverUrl}/user/balance`, {
+        const res = await axios.get(`${serverUrl}/api/user/balance`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBalance(res.data.balance);

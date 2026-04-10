@@ -1,20 +1,21 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
+import { AuthDataContext } from '../context/AuthContext'
 
 const Deposite = () => {
     const[amount,setAmount]=useState('')
     const [transactionpin,setTransactionPin]=useState('')
     const[error,setError]=useState("")
     const[success,setSuccess]=useState('')
-
+const {serverUrl}=useContext(AuthDataContext)
     const Deposite=async(e)=>{
 e.preventDefault()
 setError('')
 setSuccess('')
 try {
     const token=localStorage.getItem('token')
-    const res=await axios.post('http://localhost:7000/api/transaction',{type:'deposite',amount,transactionpin},{headers:{Authorization:`Bearer ${token}`}})
+    const res=await axios.post(`${serverUrl}/transaction`,{type:'deposite',amount,transactionpin},{headers:{Authorization:`Bearer ${token}`}})
     console.log(res.data)
     toast.success("Deposite Successfull 💰")
     setSuccess('deposite successfull')

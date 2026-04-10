@@ -1,17 +1,18 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ImSpinner9 } from "react-icons/im";
+import { AuthDataContext } from "../../context/AuthContext";
 
 const History = () => {
   const [transaction, setTransaction] = useState(null);
   const { transactionId } = useParams();
   const token=localStorage.getItem('token')
-
+const serverUrl=useContext(AuthDataContext)
   useEffect(() => {
     axios
       .get(
-        `http://localhost:7000/api/transaction/transaction/${transactionId}`,
+        `${serverUrl}/transaction/transaction/${transactionId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

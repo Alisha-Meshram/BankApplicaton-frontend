@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthDataContext } from "../context/AuthContext";
 
 const ChangePin = () => {
   const [currentPin, setCurrentPin] = useState("");
   const [newPin, setNewPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
   const [error, setError] = useState("");
-
+const serverUrl=useContext(AuthDataContext)
   const ChangePin = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -16,7 +17,7 @@ const ChangePin = () => {
     }
     try {
       const res = await axios.post(
-        "http://localhost:7000/api/user/change-pin",
+        `${serverUrl}/user/change-pin`,
         { currentPin, newPin,confirmPin},
         { headers: { Authorization: `Bearer ${token}` } }
       );

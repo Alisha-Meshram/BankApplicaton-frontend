@@ -1,16 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import axios from "axios";
+import { AuthDataContext } from "../context/AuthContext";
 
 
 const Navbar = () => {
   const [balance, setBalance] = useState(0);
+  const {serverUrl}=useContext(AuthDataContext)
   useEffect(() => {
     const getData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:7000/api/user/balance", {
+        const res = await axios.get(`${serverUrl}/user/balance`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBalance(res.data.balance);

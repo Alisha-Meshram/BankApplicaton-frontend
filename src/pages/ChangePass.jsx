@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthDataContext } from "../context/AuthContext";
 
 const ChangePass = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -8,7 +9,7 @@ const ChangePass = () => {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-
+  const { serverUrl } = useContext(AuthDataContext);
   const ChangePassword = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -17,16 +18,14 @@ const ChangePass = () => {
     }
     try {
       const res = await axios.post(
-        "http://localhost:7000/api/user/change-password",
-        { currentPassword, newPassword,confirmPassword},
+        `${serverUrl}/user/change-password`,
+        { currentPassword, newPassword, confirmPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       console.log(res.data);
-     
-      
 
-      toast.success("Change password Successfully.")
+      toast.success("Change password Successfully.");
 
       setCurrentPassword("");
       setNewPassword("");
@@ -37,8 +36,6 @@ const ChangePass = () => {
       setError(error?.response?.data?.message || "Error changing message");
     }
   };
-
-
 
   return (
     <div>
@@ -92,9 +89,7 @@ const ChangePass = () => {
         >
           Update Password
         </button>
-        {error && (
-  <p className="text-red-500 mt-2 text-sm">{error}</p>
-)}
+        {error && <p className="text-red-500 mt-2 text-sm">{error}</p>}
       </form>
       <ToastContainer />
     </div>

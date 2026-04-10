@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PiArrowFatLineDownBold, PiArrowFatLineUpBold } from "react-icons/pi";
 import { TbBrandGoogleHome } from "react-icons/tb";
 import { MdTimeline } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import axios from "axios";
+import { AuthDataContext } from "../context/AuthContext";
 
 const SideBar = () => {
   const location = useLocation();
@@ -13,11 +14,13 @@ const SideBar = () => {
 
   const [userName, setUserName] = useState("");
 
+  const {serverUrl}=useContext(AuthDataContext)
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:7000/api/auth/me", {
+        const res = await axios.get(`${serverUrl}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserName(res.data.name);

@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthDataContext } from "../context/AuthContext";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -9,11 +10,13 @@ const Dashboard = () => {
   const [transaction, setTransaction] = useState([]);
   const navigate = useNavigate();
 
+  const {serverUrl}=useContext(AuthDataContext)
+
   useEffect(() => {
     const getData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:7000/api/user/balance", {
+        const res = await axios.get(`${serverUrl}/user/balance`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setBalance(res.data.balance);
@@ -28,7 +31,7 @@ const Dashboard = () => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:7000/api/auth/me", {
+        const res = await axios.get(`${serverUrl}/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserName(res.data.name);

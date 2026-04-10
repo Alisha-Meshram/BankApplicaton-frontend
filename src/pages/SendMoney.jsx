@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthDataContext } from "../context/AuthContext";
 
 const SendMoney = () => {
   const [recipient, setRecipient] = useState("");
@@ -10,11 +11,13 @@ const SendMoney = () => {
   const [transactionpin, setTransactionPin] = useState("");
   const [success, setSuccess] = useState("");
 
+  const {serverUrl}=useContext(AuthDataContext)
+
   useEffect(() => {
     const fetchUser =async () => {
       try {
         const token = localStorage.getItem("token");
-        const res =await axios.get("http://localhost:7000/api/user/users", {
+        const res =await axios.get(`${serverUrl}/user/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(res.data);
@@ -34,7 +37,7 @@ const SendMoney = () => {
         setSuccess('')
       const token = localStorage.getItem("token");
       const res =await axios.post(
-        "http://localhost:7000/api/transaction",
+        `${serverUrl}/transaction`,
         { type: "send",recipient: recipient, amount: Number(amount), transactionpin:transactionpin },
         { headers: { Authorization: `Bearer ${token}` } }
       );

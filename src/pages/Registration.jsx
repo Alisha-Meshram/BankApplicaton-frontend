@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthDataContext } from "../context/AuthContext";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -15,12 +16,14 @@ const Registration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate=useNavigate()
 
+  const {serverUrl}=useContext(AuthDataContext)
+
   const register = async (e) => {
     setErr("");
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:7000/api/auth/registerUser`,
+        `${serverUrl}/auth/registerUser`,
         { name, email, password,confirmpass,transactionpin }
       );
       setName("");

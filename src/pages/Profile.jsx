@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ChangePass from "./ChangePass";
 import ChangePin from "./ChangePin";
 import axios from "axios";
+import { AuthDataContext } from "../context/AuthContext";
 
 const Profile = () => {
   const [userName, setUserName] = useState("");
   const [balance, setBalance] = useState(0);
   const [error,setError]=useState('')
 
+  const {serverUrl}=useContext(AuthDataContext)
+
   useEffect(() => {
     const getProfile = async () => {
       const token = localStorage.getItem("token");
       try {
         const res = await axios.get(
-          "http://localhost:7000/api/auth/me",
+          `${serverUrl}/auth/me`,
        
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -32,7 +35,7 @@ const Profile = () => {
     const getBalance=async()=>{
         const token=localStorage.getItem('token')
         try {
-           const res= await axios.get("http://localhost:7000/api/user/balance",{headers:{Authorization: `Bearer ${token}`}})
+           const res= await axios.get(`${serverUrl}/user/balance`,{headers:{Authorization: `Bearer ${token}`}})
 
            console.log(res.data)
            setBalance(res.data.balance)

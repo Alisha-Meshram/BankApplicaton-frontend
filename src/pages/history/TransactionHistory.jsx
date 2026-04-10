@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HHeader from "./HHeader";
+import { AuthDataContext } from "../../context/AuthContext";
 
 const TransactionHistory = () => {
   const [transaction, setTransaction] = useState([]);
@@ -12,6 +13,7 @@ const TransactionHistory = () => {
   const navigate = useNavigate();
   const transactionPerPage = 5;
 
+  const {serverUrl}=useContext(AuthDataContext)
   const retrive = (deposite, send) => {
     setTotalDeposite(deposite);
     setTotalSend(send);
@@ -20,7 +22,7 @@ const TransactionHistory = () => {
     const fetchTransaction = async () => {
       const token = localStorage.getItem("token");
       try {
-        const res = await axios.get("http://localhost:7000/api/transaction/", {
+        const res = await axios.get(`${serverUrl}/transaction/`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const transactions = res.data.getTransaction;

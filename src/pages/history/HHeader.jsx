@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { AuthDataContext } from "../../context/AuthContext";
 
 const HHeader = ({retrive}) => {
   const [transaction, setTransaction] = useState([]);
@@ -6,13 +7,15 @@ const HHeader = ({retrive}) => {
 
   const [totalDeposite, setTotalDeposite] = useState(0);
 
+  const { serverUrl } = useContext(AuthDataContext);
+
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:7000/api/transaction/",
+          `${serverUrl}/transaction/`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
